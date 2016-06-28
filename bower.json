@@ -1,0 +1,25 @@
+{
+  "name": "inventory_app",
+  "description": "An app to make an inventory",
+  "main": "server.js",
+  "authors": [
+    "mcharyton",
+    "djakubiak",
+    "mkonczewski"
+  ],
+  "license": "Apache 2.0",
+  "keywords": [
+    "inventory",
+    "mysql",
+    "node"
+  ],
+  "homepage": "https://github.com/mcharyton/inventory",
+  "private": true,
+  "ignore": [
+//    "**/.*",
+//    "node_modules",
+//    "bower_components",
+//    "test",
+//    "tests"
+  ]
+}
