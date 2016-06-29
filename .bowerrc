@@ -1,3 +1,4 @@
 {
-  "directory": "src/bower"
+  "directory": "src/bower",
+  "json": "bower.json"
 }
