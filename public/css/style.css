@@ -1,0 +1,138 @@
+body {
+    font-family: 'Inconsolata';
+}
+
+header {
+    font-family: 'Inconsolata';
+    background: url(img/bg.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 60%;
+    padding: 50px 0;
+    color: #033649;
+    text-shadow: 1px 1px 0 #000000;
+    font-size: 25px;
+}
+
+header h1 {
+    margin: 100px 0 10px;
+    font-family: 'Inconsolata';
+    font-size: 50px;
+}
+
+header a {
+    color: #948C75;
+    text-shadow: none;
+    font-family: 'Inconsolata';
+}
+
+a:visited {
+    color: #948C75;
+    text-shadow: none;
+}
+
+#offer {
+    padding: 100px 0;
+    background: #F1F5F7;
+}
+
+#description {
+    background: #F1F5F7;
+    padding: 100px 0;
+}
+
+footer {
+    font-family: 'Inconsolata';
+    padding: 50px 0;
+    background: #333333;
+    color: #ffffff;
+}
+
+.btn {
+    max-width: 500px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.panel {
+    max-width: 800px;
+    margin: 0 auto 0 auto;
+    font-family: 'Inconsolata';
+}
+
+.form-group {
+    width: 50%;
+    padding: 10px;
+    float: left;
+}
+
+p.login-info {
+    display: block;
+    max-width: 600px;
+    padding: 10px;
+    margin: 10px auto 10px auto;
+}
+
+div.error {
+    color: red;
+    font-weight: bold;
+}
+
+form .ng-invalid.ng-dirty {
+    background-color: lightpink;
+}
+
+form .ng-valid.ng-dirty {
+    background-color: lightgreen;
+}
+
+span.summary.ng-invalid {
+    color: red;
+    font-weight: bold;
+}
+
+span.summary.ng-valid {
+    color: green;
+}
+
+/* --- 1024 --- */
+
+@media screen and (max-width: 1024px) {
+    .panel {
+        width: 100%;
+        margin: 0;
+    }
+
+    .panel .panel-body {
+        width: 100%;
+        padding: 0;
+    }
+
+}
+
+/* --- 768 --- */
+
+@media screen and (max-width: 768px) {
+    .form-group {
+        width: 100%;
+        clear: both;
+        padding: 0px;
+    }
+
+}
+
+/* --- 480 --- */
+
+@media screen and (max-width: 480px) {
+
+    .well {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    input {
+        width: 100%;
+        padding: 0px;
+    }
+}

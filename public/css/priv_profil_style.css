@@ -1,0 +1,58 @@
+body {
+    font-family: 'Open Sans', 'sans-serif';
+}
+
+header {
+    font-family: 'Open Sans', 'sans-serif';
+    background-color: lightgray;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 25%;
+    padding: 10px 0;
+    color: #033649;
+    text-shadow: 1px 1px 0 #000000;
+    font-size: 15px;
+}
+
+header h1 {
+    margin: 50px 0 10px;
+    font-family: 'Open Sans', 'sans-serif';
+    font-size: 40px;
+}
+
+header a {
+    color: #948C75;
+    text-shadow: none;
+    font-family: 'Open Sans', 'sans-serif';
+}
+
+a:visited {
+    color: #948C75;
+    text-shadow: none;
+}
+
+#offer {
+    padding: 50px 0;
+    background: #F1F5F7;
+}
+
+#description {
+    background: #F1F5F7;
+    padding: 100px 0;
+}
+
+footer {
+    font-family: 'Open Sans', 'sans-serif';
+    padding: 50px 0;
+    background: #333333;
+    color: #ffffff;
+}
+
+.btn-custom {
+    background: #E9E9E9;
+    color: #E9E9E9;
+    padding: 80px 70px;
+    box-shadow: 0 2px 0 #3299BB;
+    text-transform: uppercase;
+}

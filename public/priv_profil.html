@@ -1,0 +1,93 @@
+<html data-ng-app="angularForm">
+<head>
+    <link href="css/vendor/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/priv_profil_style.css" rel="stylesheet" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular.min.js"></script>
+    <script type="text/javascript" src="js/controller.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <title>Strona</title>
+</head>
+<body data-ng-controller="formCtrl">
+
+<header>
+    <div class="container">
+        <div class="text-center">
+            <a href="#">Jestes zalogowany/a jako: XYZ</a>
+            <h1>Nazwa_firmy</h1>
+        </div>
+    </div>
+</header>
+
+
+<div id="offer">
+    <div class="container">
+        <div class="row text-center">
+            <h1>Profil U�ytkownika</h1>
+            <div class="col-md-offset-3 col-md-6">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="imie" class="col-md-2">
+                            Imi�:
+                        </label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="imie" value="imie" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="nazwisko" class="col-md-2">
+                            Nazwisko:
+                        </label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="nazwisko" value="nazwisko" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-md-2">
+                            Email:
+                        </label>
+                        <div class="col-md-10">
+                            <input type="email" class="form-control" id="email" value="mail" readonly="readonly">
+                            <p class="help-block">
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="col-md-2">
+                            Nr telefonu:
+                        </label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="number" value="numer telefonu"
+                                   readonly="readonly">
+                            <p class="help-block">
+                            </p>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<footer>
+    <div class="container">
+        <div class="row text-center">
+            <p class="lead">
+                Copyright &copy; | Wszelkie prawa zastrze�one
+            </p>
+        </div>
+    </div>
+</footer>
+
+
+<script src="js/vendor/jquery-2.0.3.min.js"></script>
+<script src="js/vendor/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<html data-ng-app="angularForm">
+<head>
+    <link href="css/vendor/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/zamow_pracownik_style.css" rel="stylesheet" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular.min.js"></script>
+    <script type="text/javascript" src="js/controller.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <title>Strona</title>
+</head>
+<body data-ng-controller="formCtrl">
+
+<header>
+    <div class="container">
+        <div class="text-center">
+            <a href="#">Jestes zalogowany/a jako: XYZ</a>
+            <h1>Nazwa_firmy</h1>
+        </div>
+    </div>
+</header>
+
+
+<div id="offer">
+    <div class="container">
+        <div class="row text-center">
+            <form>
+
+                <fieldset class="form-group">
+                    <label for="exampleSelect1">Kategoria</label>
+                    <select class="form-control" id="exampleSelect1">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="exampleSelect1">Typ</label>
+                    <select class="form-control" id="exampleSelect1">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="number">Ilosc</label>
+                    <input type="number" class="form-control" id="ilosc" placeholder="">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="date">Od kiedy </label>
+                    <input type="date" class="form-control" id="date1" placeholder="">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="date">Do kiedy </label>
+                    <input type="date" class="form-control" id="date2" placeholder="">
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label for="exampleTextarea">Uzasadnienie</label>
+                    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                </fieldset>
+
+                <button type="submit" class="btn btn-primary">Wyslij</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<footer>
+    <div class="container">
+        <div class="row text-center">
+            <p class="lead">
+                Copyright &copy; | Wszelkie prawa zastrzeżone
+            </p>
+        </div>
+    </div>
+</footer>
+
+
+<script src="js/vendor/jquery-2.0.3.min.js"></script>
+<script src="js/vendor/bootstrap.min.js"></script>
+
+</body>
+</html>
