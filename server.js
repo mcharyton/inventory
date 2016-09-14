@@ -1,8 +1,8 @@
 /**
  * Created by m.charyton on 27.06.2016.
  */
-var express = require('express');
-var app = express();
+let express = require('express');
+let app = express();
 // var mysql = require('src/msyql');
 
 app.use(express.static(__dirname + '/public'));
