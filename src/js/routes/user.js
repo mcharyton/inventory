@@ -37,7 +37,7 @@ let addUser = function (req, res) {
                 name = name.replace(/'/g, "\\'");
             } else {
                 console.log('No user name');
-                name = '';
+                return;
             }
             return name;
         },
@@ -47,7 +47,8 @@ let addUser = function (req, res) {
                 surname = req.body.surname;
                 surname = surname.replace(/'/g, "\\'");
             } else {
-                surname = null;
+                console.log('No user surname');
+                return;
             }
             return surname;
         },
@@ -55,7 +56,7 @@ let addUser = function (req, res) {
             let mail;
             if (req.body.hasOwnProperty('mail')) {
                 mail = req.body.mail;
-                mail = mail.replace(/'/g, "\\'");
+                mail = "'" + mail.replace(/'/g, "\\'") + "'";
             } else {
                 mail = null;
             }
@@ -65,7 +66,7 @@ let addUser = function (req, res) {
             let phone;
             if (req.body.hasOwnProperty('phone')) {
                 phone = req.body.phone;
-                phone = phone.replace(/'/g, "\\'");
+                phone = "'" + phone.replace(/'/g, "\\'") + "'";
             } else {
                 phone = null;
             }
@@ -75,7 +76,7 @@ let addUser = function (req, res) {
             let login;
             if (req.body.hasOwnProperty('login')) {
                 login = req.body.login;
-                login = login.replace(/'/g, "\\'");
+                login = "'" + login.replace(/'/g, "\\'") + "'";
             } else {
                 login = null;
             }
@@ -85,7 +86,7 @@ let addUser = function (req, res) {
             let pass;
             if (req.body.hasOwnProperty('pass')) {
                 pass = req.body.pass;
-                pass = pass.replace(/'/g, "\\'");
+                pass = "'" + pass.replace(/'/g, "\\'") + "'";
             } else {
                 pass = null;
             }
@@ -93,10 +94,62 @@ let addUser = function (req, res) {
         }
     };
 
-    let sql = "INSERT INTO User (Name, Surname, Mail, Phone_Number) VALUES(" + user.name() + ", " + user.surname() + ", " + user.mail() + ", " + user.phone() + ")";
-    // INSERT INTO User_Account (User_Id, Login, Password) VALUES(LAST_INSERT_ID(), " + user.login() + ", " + user.pass() + ") COMMIT";
-    console.log(sql);
-    querySql(req, res, sql);
+
+    // console.log(sql);
+
+    conn.pool.getConnection(function (err, connection) {
+        if (err) {
+            res.json({"code": 200, "status": "Error in connection to database: " + err});
+            return;
+        }
+
+        console.log("connected as: " + connection.threadId);
+
+        connection.beginTransaction(function (err) {
+            if (err) {
+                throw err;
+            }
+
+            let sql = "INSERT INTO User (Name, Surname, Mail, Phone_Number) VALUES ('" + user.name() + "', '" + user.surname() + "', " + user.mail() + ", " + user.phone() + ")";
+
+            connection.query(sql, function (err, rows) {
+                connection.release();
+                if (err) {
+                    console.log(err);
+                    return connection.rollback(function () {
+                        throw err;
+                    });
+                }
+                let sql2 = "INSERT INTO User_Account (User_Id, Login, Password) VALUES(" + rows.insertId + ", " + user.login() + ", " + user.pass() + ")";
+
+                connection.query(sql2, function (err, rows) {
+                    if (err) {
+                        console.log(err);
+                        return connection.rollback(function () {
+                            throw err;
+                        });
+                    }
+
+                    connection.commit(function (err) {
+                        if (err) {
+                            return connection.rollback(function () {
+                                throw err;
+                            });
+                        }
+                        console.log("Success!:");
+                        console.log(rows);
+                        res.send("User added successfully!");
+                        return rows;
+                    });
+                });
+            });
+
+
+            // connection.on('error', function (err) {
+            //     res.json({"code": 100, "status": "error in query: " + err});
+            // });
+        });
+    });
 };
 let editUser = function (req, res) {
     "use strict";
@@ -162,3 +215,4 @@ userRouter.post('/role', addRole);
 // #######################################
 
 module.exports = userRouter;
+
