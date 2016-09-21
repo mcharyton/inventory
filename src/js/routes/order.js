@@ -1,5 +1,5 @@
 /**
- * Created by Dominik on 2016-09-21.
+ * Created by m.charyton on 21.09.2016.
  */
 "use strict";
 let bodyParser = require('body-parser');
@@ -11,15 +11,16 @@ userRouter.use(function (req, res, next) {
     next();
 });
 
-let showInventory = function (req, res) {
+let showDetailedOrder = function (req, res) {
     "use strict";
     // Show inventory
-    let sql = "SELECT Inventory.Inventory_Id, Inventory.Label, Inventory.Price, Inventory.Details, Inventory.Serial_Number, Inventory.Status_Id, Inventory.Status_Change_Date, Inventory_Category.Category_Name, Inventory_Type.Type_Name, Providers.Provider_Name FROM Inventory INNER JOIN Inventory_Type ON Inventory.Type_Id = Inventory_Type.Type_Id INNER JOIN Inventory_Category ON Inventory_Type.Category_Id = Inventory_Category.Category_Id INNER JOIN Providers ON Inventory.Provider_Id = Providers.Provider_Id";
+    let sql = "SELECT Inventory.Label, Order_Detail.Quantity, Order_Detail.`Comment`, Order_Detail.Status_Id, Order_Detail.Status_Change_Date, Order_Detail.Order_Date, Order_Detail.Realization_Date, Order_Detail.Price, Order_Detail.Approved, Order_Detail.Approved_Date, `User`.`Name`, `User`.Surname, Order_Detail.Order_Id FROM Order_Detail INNER JOIN `User` ON Order_Detail.User_Id = `User`.User_Id INNER JOIN Inventory ON Order_Detail.Inventory_Id = Inventory.Inventory_Id";
 
     if (req.params.id) {
-        let inventory = req.params.id;
-        sql += " WHERE Inventory.Inventory_Id = " + inventory;
+        let order = req.params.id;
+        sql += " WHERE Order_Detail.Order_Detail_Id = " + order;
     }
+
     querySql(req, res, sql);
 };
 
@@ -210,9 +211,8 @@ function querySql(req, res, sql) {
 var jsonParser = bodyParser.json();
 
 // Show specific inventory
-userRouter.get('/', showInventory);
-userRouter.get('/:id', showInventory);
-userRouter.post('/', addInventory);
+// userRouter.get('/orders/', showOrder);
+userRouter.get('/order/:id', showDetailedOrder);
 userRouter.post('/provider/', addProvider);
 
 // #######################################

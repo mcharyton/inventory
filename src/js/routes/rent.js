@@ -1,5 +1,5 @@
 /**
- * Created by Dominik on 2016-09-21.
+ * Created by m.charyton on 21.09.2016.
  */
 "use strict";
 let bodyParser = require('body-parser');
@@ -14,12 +14,13 @@ userRouter.use(function (req, res, next) {
 let showInventory = function (req, res) {
     "use strict";
     // Show inventory
-    let sql = "SELECT Inventory.Inventory_Id, Inventory.Label, Inventory.Price, Inventory.Details, Inventory.Serial_Number, Inventory.Status_Id, Inventory.Status_Change_Date, Inventory_Category.Category_Name, Inventory_Type.Type_Name, Providers.Provider_Name FROM Inventory INNER JOIN Inventory_Type ON Inventory.Type_Id = Inventory_Type.Type_Id INNER JOIN Inventory_Category ON Inventory_Type.Category_Id = Inventory_Category.Category_Id INNER JOIN Providers ON Inventory.Provider_Id = Providers.Provider_Id";
+    let sql = "SELECT Inventory.Inventory_Id, Inventory.Label, Inventory.Price, Inventory.Details, Inventory.Serial_Number, Inventory.Status_Id, Inventory.Status_Change_Date, Inventory_Category.Category_Name, Inventory_Type.Type_Name, Providers.Provider_Name FROM Inventory INNER JOIN Inventory_Type ON Inventory.Type_Id = Inventory_Type.Type_Id INNER JOIN Inventory_Category ON Inventory_Type.Category_Id = Inventory_Category.Category_Id INNER JOIN Providers ON Inventory.Provider_Id = Providers.Provider_Id ";
 
-    if (req.params.id) {
-        let inventory = req.params.id;
-        sql += " WHERE Inventory.Inventory_Id = " + inventory;
+    if (req.body.hasOwnProperty("inventory")) {
+        let inventory = req.body.inventory;
+        sql += sql + " WHERE Inventory.Inventory_Id IN ( " + inventory + ")"
     }
+
     querySql(req, res, sql);
 };
 
@@ -164,14 +165,14 @@ let addProvider = function (req, res) {
 };
 let changeStatus = function (req, res) {
     "use strict";
-    if (req.body.hasOwnProperty("status_id")) {
-        let status_id = req.body.status_id;
+    if (req.body.hasOwnProperty("status")) {
+        let status = req.body.status;
     }
     if (req.body.hasOwnProperty("inventory_id")) {
         let inventory_id = req.body.inventory_id;
     }
 
-    let sql = "UPDATE Inventory SET Status_Id = " + status_id + " WHERE Inventory.Inventory_Id =" + inventory_id;
+    let sql = "UPDATE Inventory SET Status_Id = " + status + " WHERE Inventory.Inventory_Id =" + inventory_id;
     querySql(req, res, sql);
 };
 
@@ -211,7 +212,6 @@ var jsonParser = bodyParser.json();
 
 // Show specific inventory
 userRouter.get('/', showInventory);
-userRouter.get('/:id', showInventory);
 userRouter.post('/', addInventory);
 userRouter.post('/provider/', addProvider);
 

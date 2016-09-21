@@ -8,17 +8,14 @@ userRouter.use(function (req, res, next) {
     next();
 });
 
-let getUsers = function (req, res) {
-    "use strict";
-    // Show all users
-    let sql = "SELECT u.Name, u.Surname, u.Mail, u.Phone_Number FROM User AS u";
-    querySql(req, res, sql);
-};
 let getUser = function (req, res) {
     "use strict";
     // Show specific user
-    let userId = req.params.UserId;
-    let sql = "SELECT u.Name, u.Surname, u.Mail, u.Phone_Number FROM User AS u WHERE u.User_Id = " + userId;
+    let sql = "SELECT u.Name, u.Surname, u.Mail, u.Phone_Number FROM User AS u ";
+    if (req.params.UserId) {
+        let userId = req.params.UserId;
+        sql += "WHERE u.User_Id = " + userId;
+    }
     querySql(req, res, sql);
 };
 let validateUser = function (user) {
@@ -200,7 +197,7 @@ function querySql(req, res, sql) {
 var jsonParser = bodyParser.json();
 
 // Show all users
-userRouter.get('/', getUsers);
+userRouter.get('/', getUser);
 // Create new user
 userRouter.post('/', addUser);
 // Show specific user
