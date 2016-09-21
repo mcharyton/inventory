@@ -4,6 +4,7 @@
 let express = require('express');
 let app = express();
 let userRouter = require('./src/js/routes/user.js');
+let inventoryRouter = require('./src/js/routes/inventory.js');
 let bodyParser = require('body-parser');
 
 // parse application/x-www-form-urlencoded
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 // Route to Angular App
 app.use(express.static(__dirname + '/public'));
 app.use('/api/user', userRouter);
+app.use('/api/inventory', inventoryRouter);
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!');
