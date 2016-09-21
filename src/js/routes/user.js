@@ -9,108 +9,108 @@ userRouter.use(function (req, res, next) {
 });
 
 let getUsers = function (req, res) {
-        "use strict";
-        // Show all users
-        let sql = "SELECT u.Name, u.Surname, u.Mail, u.Phone_Number FROM User AS u";
-        querySql(req, res, sql);
-    },
-    getUser = function (req, res) {
-        "use strict";
-        // Show specific user
-        let userId = req.params.UserId;
-        let sql = "SELECT u.Name, u.Surname, u.Mail, u.Phone_Number FROM User AS u WHERE u.User_Id = " + userId;
-        querySql(req, res, sql);
-    },
-    validateUser = function (user) {
+    "use strict";
+    // Show all users
+    let sql = "SELECT u.Name, u.Surname, u.Mail, u.Phone_Number FROM User AS u";
+    querySql(req, res, sql);
+};
+let getUser = function (req, res) {
+    "use strict";
+    // Show specific user
+    let userId = req.params.UserId;
+    let sql = "SELECT u.Name, u.Surname, u.Mail, u.Phone_Number FROM User AS u WHERE u.User_Id = " + userId;
+    querySql(req, res, sql);
+};
+let validateUser = function (user) {
 
-    },
-    addUser = function (req, res) {
-        "use strict";
-        // Create new user
-        console.log(req.body);
-        let user = {
-            // name: req.body.name,
-            name: function () {
-                let name;
-                if (req.body.hasOwnProperty('name')) {
-                    name = req.body.name;
-                    name = name.replace(/'/g, "\\'");
-                } else {
-                    console.log('No user name');
-                    name = '';
-                }
-                return name;
-            },
-            surname: function () {
-                let surname;
-                if (req.body.hasOwnProperty('surname')) {
-                    surname = req.body.surname;
-                    surname = surname.replace(/'/g, "\\'");
-                } else {
-                    surname = null;
-                }
-                return surname;
-            },
-            mail: function () {
-                let mail;
-                if (req.body.hasOwnProperty('mail')) {
-                    mail = req.body.mail;
-                    mail = mail.replace(/'/g, "\\'");
-                } else {
-                    mail = null;
-                }
-                return mail;
-            },
-            phone: function () {
-                let phone;
-                if (req.body.hasOwnProperty('phone')) {
-                    phone = req.body.phone;
-                    phone = phone.replace(/'/g, "\\'");
-                } else {
-                    phone = null;
-                }
-                return phone;
-            },
-            login: function () {
-                let login;
-                if (req.body.hasOwnProperty('login')) {
-                    login = req.body.login;
-                    login = login.replace(/'/g, "\\'");
-                } else {
-                    login = null;
-                }
-                return login;
-            },
-            pass: function () {
-                let pass;
-                if (req.body.hasOwnProperty('pass')) {
-                    pass = req.body.pass;
-                    pass = pass.replace(/'/g, "\\'");
-                } else {
-                    pass = null;
-                }
-                return pass;
+};
+let addUser = function (req, res) {
+    "use strict";
+    // Create new user
+    console.log(req.body);
+    let user = {
+        // name: req.body.name,
+        name: function () {
+            let name;
+            if (req.body.hasOwnProperty('name')) {
+                name = req.body.name;
+                name = name.replace(/'/g, "\\'");
+            } else {
+                console.log('No user name');
+                name = '';
             }
-        };
-
-        let sql = "INSERT INTO User (Name, Surname, Mail, Phone_Number) VALUES(" + user.name() + ", " + user.surname() + ", " + user.mail() + ", " + user.phone() + ")";
-        // INSERT INTO User_Account (User_Id, Login, Password) VALUES(LAST_INSERT_ID(), " + user.login() + ", " + user.pass() + ") COMMIT";
-        console.log(sql);
-        querySql(req, res, sql);
-    },
-    editUser = function (req, res) {
-        "use strict";
-
-    },
-    addRole = function (req, res) {
-        "use strict";
-        // Set user role
-
-        let userId = req.params.UserId;
-        let role = req.params.RoleId;
-        let sql = "INSERT INTO user_per_role (User_Id, Role_Id) VALUES(" + userId + ", " + role + ");";
-        querySql(req, res, sql);
+            return name;
+        },
+        surname: function () {
+            let surname;
+            if (req.body.hasOwnProperty('surname')) {
+                surname = req.body.surname;
+                surname = surname.replace(/'/g, "\\'");
+            } else {
+                surname = null;
+            }
+            return surname;
+        },
+        mail: function () {
+            let mail;
+            if (req.body.hasOwnProperty('mail')) {
+                mail = req.body.mail;
+                mail = mail.replace(/'/g, "\\'");
+            } else {
+                mail = null;
+            }
+            return mail;
+        },
+        phone: function () {
+            let phone;
+            if (req.body.hasOwnProperty('phone')) {
+                phone = req.body.phone;
+                phone = phone.replace(/'/g, "\\'");
+            } else {
+                phone = null;
+            }
+            return phone;
+        },
+        login: function () {
+            let login;
+            if (req.body.hasOwnProperty('login')) {
+                login = req.body.login;
+                login = login.replace(/'/g, "\\'");
+            } else {
+                login = null;
+            }
+            return login;
+        },
+        pass: function () {
+            let pass;
+            if (req.body.hasOwnProperty('pass')) {
+                pass = req.body.pass;
+                pass = pass.replace(/'/g, "\\'");
+            } else {
+                pass = null;
+            }
+            return pass;
+        }
     };
+
+    let sql = "INSERT INTO User (Name, Surname, Mail, Phone_Number) VALUES(" + user.name() + ", " + user.surname() + ", " + user.mail() + ", " + user.phone() + ")";
+    // INSERT INTO User_Account (User_Id, Login, Password) VALUES(LAST_INSERT_ID(), " + user.login() + ", " + user.pass() + ") COMMIT";
+    console.log(sql);
+    querySql(req, res, sql);
+};
+let editUser = function (req, res) {
+    "use strict";
+
+};
+let addRole = function (req, res) {
+    "use strict";
+    // Set user role
+
+    let userId = req.params.UserId;
+    let role = req.params.RoleId;
+    let sql = "INSERT INTO user_per_role (User_Id, Role_Id) VALUES(" + userId + ", " + role + ");";
+    querySql(req, res, sql);
+};
 
 function querySql(req, res, sql) {
     "use strict";
