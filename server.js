@@ -15,14 +15,19 @@ app.use(bodyParser.urlencoded({extended: false}));
 // parse application/json
 app.use(bodyParser.json());
 
-// Route to Angular App
-app.use(express.static(__dirname + '/public'));
-
 // Api routes
 app.use('/api/user', userRouter);
 app.use('/api/inventory', inventoryRouter);
 app.use('/api/order', orderRouter);
 app.use('/api/rent', rentRouter);
+
+// Route to Angular App
+app.use(express.static(__dirname + '/public'));
+// app.use(app.router);
+app.use(function (req, res) {
+    // "use strict";
+    res.sendFile(__dirname + '/public/');
+});
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!');

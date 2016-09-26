@@ -1,6 +1,30 @@
-var angularForm = angular.module('angularForm', []);
+var app = angular.module("app", ["ngRoute"]);
+app.config(['$routeProvider', '$locationProvider', '$controllerProvider', function ($routeProvider, $locationProvider, $controllerProvider) {
+    $locationProvider.html5Mode(true);
 
-angularForm.controller("formCtrl", function ($scope, $http) {
+    $routeProvider
+        .when('/', {
+            templateUrl: '../views/main.html'
+        })
+        .when('/pracownik', {
+            templateUrl: '../views/pracownik.html'
+        })
+        .when('/zamow', {
+            templateUrl: '../views/pracownik.html'
+        })
+        .when('/wypozycz', {
+            templateUrl: '../views/pracownik.html'
+        })
+        .when('/profil', {
+            templateUrl: '../views/pracownik.html'
+        });
+
+    app.controllerProvider = $controllerProvider;
+
+}]);
+
+
+app.controller("formCtrl", function ($scope, $http) {
     $scope.emailPattern = new RegExp("(?=.*[@])(?=.*[.])");
     $scope.passPattern = new RegExp("(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])");
 
