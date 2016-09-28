@@ -11,7 +11,7 @@ userRouter.use(function (req, res, next) {
 let getUser = function (req, res) {
     "use strict";
     // Show specific user
-    let sql = "SELECT u.Name, u.Surname, u.Mail, u.Phone_Number FROM User AS u ";
+    let sql = "SELECT u.User_Id, u.Name, u.Surname, u.Mail, u.Phone_Number FROM User AS u ";
     if (req.params.UserId) {
         let userId = req.params.UserId;
         sql += "WHERE u.User_Id = " + userId;

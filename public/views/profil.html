@@ -1,12 +1,25 @@
 <div id="offer">
     <div class="container">
         <div class="row text-center">
-            <h1>Profil U�ytkownika</h1>
+            <h1>Profil Użytkownika</h1>
             <div class="col-md-offset-3 col-md-6">
-                <form role="form">
-                    <div class="form-group">
+                <div class="user" ng-repeat="user in users">
+                    <span class="id">{{ user.User_Id }}</span>
+                    <span class="imie"> {{ user.Name }} </span>
+                    <span class="nazwisko"> {{ user.Surname }} </span>
+                    <span class="phone"> {{ user.Phone_Number }} </span>
+                    <span class="mail"> {{ user.Mail }} </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--
+   <div class="form-group">
                         <label for="imie" class="col-md-2">
-                            Imi�:
+                            Imię: {{ user.Name }}
                         </label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" id="imie" value="imie" readonly="readonly">
@@ -14,7 +27,7 @@
                     </div>
                     <div class="form-group">
                         <label for="nazwisko" class="col-md-2">
-                            Nazwisko:
+                            Nazwisko: {{ user.Surname }}
                         </label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" id="nazwisko" value="nazwisko" readonly="readonly">
@@ -44,7 +57,4 @@
                     </div>
 
                 </form>
-            </div>
-        </div>
-    </div>
-</div>
+ -->
