@@ -10,3 +10,4 @@ app.factory('types', ['$http', function ($http) {
             return err;
         });
 }]);
+

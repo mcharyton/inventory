@@ -1,8 +1,11 @@
 /**
  * Created by Dominik on 2016-09-28.
  */
-app.directive('productForm', function () {
+app.directive('productRentForm', function () {
     return {
+        scope: {
+            chartData: '='
+        },
         template: '<div> \
         <fieldset class="form-group">\
         <label for="exampleSelect1">Kategoria</label>\
