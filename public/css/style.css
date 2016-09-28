@@ -1,12 +1,20 @@
-body {
+body, html {
     font-family: 'Inconsolata';
+    position: relative;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    margin-bottom: 0px;
 }
 
 header {
     font-family: 'Inconsolata';
     background-size: 100%;
-    background: url("../assets/images/bg.jpg") no-repeat fixed;
-    height: 175px;
+    /*background: url("../assets/images/bg.jpg") no-repeat ;*/
+    height: 145px;
     padding: 15px 0;
     color: #033649;
     text-shadow: 1px 1px 0 #000000;
@@ -41,8 +49,13 @@ a:visited {
 }
 
 footer {
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
     font-family: 'Inconsolata';
+    height: 75px;
     padding: 25px 0;
+    bottom: 0px;
     background: #333333;
     color: #ffffff;
 }
