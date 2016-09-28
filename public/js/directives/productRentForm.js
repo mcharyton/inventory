@@ -3,28 +3,21 @@
  */
 app.directive('productRentForm', function () {
     return {
-        scope: {
-            chartData: '='
-        },
+        // scope: {
+        //     data: '='
+        // },
+        //
         template: '<div> \
         <fieldset class="form-group">\
-        <label for="exampleSelect1">Kategoria</label>\
-        <select class="form-control" id="exampleSelect1">\
-        <option>1</option>\
-        <option>2</option>\
-        <option>3</option>\
-        <option>4</option>\
-        <option>5</option>\
+        <label for="categorySelect">Kategoria</label>\
+        <select name="category" class="form-control" id="categorySelect" ng-model="selectedCategory"">\
+            <option ng-repeat="category in categories" value="{{category.Category_Id}}">{{ category.Category_Name }}</option>\
         </select>\
         </fieldset>\
-        <fieldset class="form-group">\
-        <label for="exampleSelect1">Typ</label>\
-        <select class="form-control" id="exampleSelect1">\
-        <option>1</option>\
-        <option>2</option>\
-        <option>3</option>\
-        <option>4</option>\
-        <option>5</option>\
+        <fieldset class="form-group" ng-show="selectedCategory">\
+        <label for="typeSelect">Typ</label>\
+        <select name="type" class="form-control" id="typeSelect" ng-model="selectedType">\
+        <option ng-repeat="type in types || filter : { type.Category_Id: selectedCategory } : true" value="{{ type.Type_Id }}">{{ type.Type_Name }}</option>\
         </select>\
         </fieldset>\
         <fieldset class="form-group">\
