@@ -1,4 +1,4 @@
-app.controller('profilCtrl', ['$scope', 'users', function ($scope, users) {
+app.controller('profileCtrl', ['$scope', 'users', function ($scope, users) {
     users.success(function (data) {
         $scope.users = data;
     });

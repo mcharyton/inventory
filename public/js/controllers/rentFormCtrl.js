@@ -1,7 +1,7 @@
 /**
  * Created by m.charyton on 28.09.2016.
  */
-app.controller("formCtrl", function ($scope, $http) {
+app.controller("rentFormCtrl", function ($scope, $http) {
     $scope.emailPattern = new RegExp("(?=.*[@])(?=.*[.])");
     $scope.passPattern = new RegExp("(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])");
 

@@ -14,12 +14,12 @@ app.config(['$routeProvider', '$locationProvider', '$controllerProvider', functi
             templateUrl: '../views/zamow.html'
         })
         .when('/wypozycz', {
-            controller: 'formCtrl',
+            controller: 'rentFormCtrl',
             templateUrl: '../views/wypozycz.html'
         })
         .when('/profil', {
-            controller: 'profilCtrl',
-            templateUrl: '../views/profil.html'
+            controller: 'profileCtrl',
+            templateUrl: '../views/profile.html'
         })
         .when('/404', {
             controller: ['$location', function ($location) {
