@@ -4,7 +4,7 @@ app.config(['$routeProvider', '$locationProvider', '$controllerProvider', functi
 
     $routeProvider
         .when('/', {
-            contoller: 'formCtrl',
+            controller: 'formCtrl',
             templateUrl: '../views/main.html'
         })
         .when('/pracownik', {
@@ -14,6 +14,7 @@ app.config(['$routeProvider', '$locationProvider', '$controllerProvider', functi
             templateUrl: '../views/zamow.html'
         })
         .when('/wypozycz', {
+            controller: 'formCtrl',
             templateUrl: '../views/wypozycz.html'
         })
         .when('/profil', {
