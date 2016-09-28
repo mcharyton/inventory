@@ -2,15 +2,33 @@
     <div class="container">
         <div class="row text-center">
             <h1>Profil Użytkownika</h1>
-            <div class="col-md-offset-3 col-md-6">
-                <div class="user" ng-repeat="user in users">
-                    <span class="id">{{ user.User_Id }}</span>
-                    <span class="imie"> {{ user.Name }} </span>
-                    <span class="nazwisko"> {{ user.Surname }} </span>
-                    <span class="phone"> {{ user.Phone_Number }} </span>
-                    <span class="mail"> {{ user.Mail }} </span>
-                </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="naglowek in [
+									'Id' , 'Imię' , 'Nazwisko' , 'Telefon', 'E-mail', ''
+								]">
+                            {{naglowek}}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="user" ng-repeat='user in users'>
+                        <td class="id">{{ user.User_Id }}</td>
+                        <td class="imie">{{ user.Name }}</td>
+                        <td class="nazwisko">{{ user.Surname }}</td>
+                        <td class="phone">{{ user.Phone_Number }}</td>
+                        <td class="mail">{{ user.Mail }}</td>
+                        <td>
+                            <button class="btn btn-success btn-sm"> edytuj</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+
+
         </div>
     </div>
 </div>

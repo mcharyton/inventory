@@ -7,6 +7,7 @@ let userRouter = require('./src/js/routes/user.js');
 let inventoryRouter = require('./src/js/routes/inventory.js');
 let orderRouter = require('./src/js/routes/order.js');
 let rentRouter = require('./src/js/routes/rent.js');
+let otherRouter = require('./src/js/routes/others.js');
 let bodyParser = require('body-parser');
 
 // parse application/x-www-form-urlencoded
@@ -20,6 +21,7 @@ app.use('/api/user', userRouter);
 app.use('/api/inventory', inventoryRouter);
 app.use('/api/order', orderRouter);
 app.use('/api/rent', rentRouter);
+app.use('/api/other', otherRouter);
 app.get('/404', function (req, res) {
     res.send('Not found', 404);
 });
