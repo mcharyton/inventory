@@ -20,6 +20,9 @@ app.use('/api/user', userRouter);
 app.use('/api/inventory', inventoryRouter);
 app.use('/api/order', orderRouter);
 app.use('/api/rent', rentRouter);
+app.get('/404', function (req, res) {
+    res.send('Not found', 404);
+});
 
 // Route to Angular App
 app.use(express.static(__dirname + '/public'));
