@@ -212,8 +212,8 @@ var jsonParser = bodyParser.json();
 
 // Show specific inventory
 // userRouter.get('/orders/', showOrder);
-userRouter.get('/order', showDetailedOrder);
-userRouter.get('/order/:id', showDetailedOrder);
+userRouter.get('/', showDetailedOrder);
+userRouter.get('/:id', showDetailedOrder);
 userRouter.post('/provider/', addProvider);
 
 // #######################################
