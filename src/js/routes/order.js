@@ -14,12 +14,7 @@ userRouter.use(function (req, res, next) {
 let showDetailedOrder = function (req, res) {
     "use strict";
     // Show inventory
-    let sql = "SELECT Inventory.Label, Order_Detail.Quantity, Order_Detail.`Comment`, Order_Detail.Status_Id, Order_Detail.Status_Change_Date, Order_Detail.Order_Date, Order_Detail.Realization_Date, Order_Detail.Price, Order_Detail.Approved, Order_Detail.Approved_Date, `User`.`Name`, `User`.Surname, Order_Detail.Order_Id FROM Order_Detail INNER JOIN `User` ON Order_Detail.User_Id = `User`.User_Id INNER JOIN Inventory ON Order_Detail.Inventory_Id = Inventory.Inventory_Id";
-
-    if (req.params.id) {
-        let order = req.params.id;
-        sql += " WHERE Order_Detail.Order_Detail_Id = " + order;
-    }
+    let sql = "SELECT Order_Detail.Quantity, Inventory.Label, Order_Detail.`Comment`, Order_Detail.Status_Id, Order_Detail.Status_Change_Date, Order_Detail.Order_Date, Order_Detail.Realization_Date, Order_Detail.Price, Order_Detail.Approved, Order_Detail.Approved_Date, `User`.`Name`, `User`.Surname, Order_Detail.Order_Id, Inventory_Category.Category_Name, Inventory_Type.Type_Name FROM Order_Detail INNER JOIN `User` ON Order_Detail.User_Id = `User`.User_Id INNER JOIN Inventory ON Order_Detail.Inventory_Id = Inventory.Inventory_Id INNER JOIN Inventory_Type ON Inventory.Type_Id = Inventory_Type.Type_Id INNER JOIN Inventory_Category ON Inventory_Type.Category_Id = Inventory_Category.Category_Id";
 
     querySql(req, res, sql);
 };

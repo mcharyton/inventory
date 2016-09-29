@@ -17,6 +17,10 @@ app.config(['$routeProvider', '$locationProvider', '$controllerProvider', functi
             controller: 'rentFormCtrl',
             templateUrl: '../views/wypozycz.html'
         })
+        .when('/status', {
+            controller: 'statusCtrl',
+            templateUrl: '../views/status.html'
+        })
         .when('/profil', {
             controller: 'profileCtrl',
             templateUrl: '../views/profile.html'

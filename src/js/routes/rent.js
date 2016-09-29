@@ -14,12 +14,37 @@ userRouter.use(function (req, res, next) {
 let showInventory = function (req, res) {
     "use strict";
     // Show inventory
-    let sql = "SELECT Inventory.Inventory_Id, Inventory.Label, Inventory.Price, Inventory.Details, Inventory.Serial_Number, Inventory.Status_Id, Inventory.Status_Change_Date, Inventory_Category.Category_Name, Inventory_Type.Type_Name, Providers.Provider_Name FROM Inventory INNER JOIN Inventory_Type ON Inventory.Type_Id = Inventory_Type.Type_Id INNER JOIN Inventory_Category ON Inventory_Type.Category_Id = Inventory_Category.Category_Id INNER JOIN Providers ON Inventory.Provider_Id = Providers.Provider_Id ";
+    let sql = "SELECT\
+    Rent.Rent_Id,\
+        Rent.`Comment`,\
+        Rent.Start_Date,\
+        Rent.End_Date,\
+        Rent_Detail.Rent_Detail_Id,\
+        Rent_Detail.Inventory_Id,\
+        Rent_Detail.Quantity,\
+        `Status`.Status_Name,\
+        Inventory_Category.Category_Name,\
+        Inventory_Type.Type_Name,\
+        `User`.`Name`,\
+        `User`.Surname,\
+        Rent.Status_Change_Date,\
+        Inventory.Label,\
+        Inventory.Serial_Number,\
+        Inventory_Category.Category_Id,\
+        Inventory_Type.Type_Id\
+    FROM\
+    Rent\
+    INNER JOIN Rent_Detail ON Rent_Detail.Rent_Id = Rent.Rent_Id\
+    INNER JOIN `Status` ON Rent.Status_Id = `Status`.Status_Id\
+    INNER JOIN Inventory ON Rent_Detail.Inventory_Id = Inventory.Inventory_Id\
+    INNER JOIN Inventory_Type ON Inventory_Type.Type_Id = Inventory.Type_Id\
+    INNER JOIN `User` ON Rent.User_Id = `User`.User_Id\
+    INNER JOIN Inventory_Category ON Inventory_Category.Category_Id = Inventory_Type.Category_Id";
 
-    if (req.body.hasOwnProperty("inventory")) {
+    /* if (req.body.hasOwnProperty("inventory")) {
         let inventory = req.body.inventory;
         sql += sql + " WHERE Inventory.Inventory_Id IN ( " + inventory + ")"
-    }
+     } */
 
     querySql(req, res, sql);
 };
