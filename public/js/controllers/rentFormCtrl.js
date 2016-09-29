@@ -10,8 +10,19 @@ app.controller("rentFormCtrl", ['$scope', 'types', 'categories', function ($scop
         $scope.types = data;
     });
     $scope.today = new Date();
-    let date = new Date(fromDate);
+    // let date =
     // date.setDate(fromDate + 30);
-    $scope.maxDate = date;
+    $scope.toDateChange = function (fromDate) {
+        let date = new Date(fromDate);
+        $scope.minToDate = date;
+        let toDate = new Date();
+        toDate.setMonth(date.getMonth() + 1);
+        $scope.maxToDate = toDate;
+    };
+
+
+    $scope.submit = function (rent) {
+        $scope.toRent = JSON.stringify(rent);
+    };
 
 }]);
