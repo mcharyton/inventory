@@ -16,15 +16,21 @@ app.use(bodyParser.urlencoded({extended: false}));
 // parse application/json
 app.use(bodyParser.json());
 
+app.get('/404', function (req, res) {
+    res.status(404).send('Not found');
+});
+
+app.use('/api/', function (req, res, next) {
+    console.log('Sprawdzam...');
+    next();
+
+});
 // Api routes
 app.use('/api/user', userRouter);
 app.use('/api/inventory', inventoryRouter);
 app.use('/api/order', orderRouter);
 app.use('/api/rent', rentRouter);
 app.use('/api/other', otherRouter);
-app.get('/404', function (req, res) {
-    res.send('Not found', 404);
-});
 
 // Route to Angular App
 app.use(express.static(__dirname + '/public'));

@@ -23,7 +23,7 @@ app.directive('productRentForm', function () {
         </fieldset>\
         <fieldset class="form-group">\
         <label for="number">Ilość</label>\
-        <input type="number" min="1" max="1000" class="form-control" id="quantity" ng-model="rent.quantity">\
+        <input type="number" min="1" max="1000" class="form-control" id="quantity" ng-model="rent.rQuantity">\
         </fieldset>\
         <fieldset class="form-group">\
         <label for="fromDate">Od kiedy </label>\

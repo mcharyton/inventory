@@ -11,6 +11,25 @@ userRouter.use(function (req, res, next) {
     next();
 });
 
+/**
+ * You first need to create a formatting function to pad numbers to two digits…
+ **/
+function twoDigits(d) {
+    if (0 <= d && d < 10) return "0" + d.toString();
+    if (-10 < d && d < 0) return "-0" + (-1 * d).toString();
+    return d.toString();
+}
+
+/**
+ * …and then create the method to output the date string as desired.
+ * Some people hate using prototypes this way, but if you are going
+ * to apply this to more than one Date object, having it as a prototype
+ * makes sense.
+ **/
+Date.prototype.toMysqlFormat = function () {
+    return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
+};
+
 let showRent = function (req, res) {
     "use strict";
     // Show inventory
@@ -76,8 +95,8 @@ let addRent = function (req, res) {
         },
         typeId: function () {
             let value;
-            if (req.body.hasOwnProperty('typeId')) {
-                value = req.body.typeId;
+            if (req.body.hasOwnProperty('selectedType')) {
+                value = req.body.selectedType;
                 value = value.replace(/'/g, "\\'");
             } else {
                 console.log('No typeId');
@@ -87,9 +106,8 @@ let addRent = function (req, res) {
         },
         quantity: function () {
             let value;
-            if (req.body.hasOwnProperty('quantity')) {
-                value = req.body.quantity;
-                value = value.replace(/'/g, "\\'");
+            if (req.body.hasOwnProperty('rQuantity')) {
+                value = req.body.rQuantity;
             } else {
                 console.log('No quantity');
                 return;
@@ -100,7 +118,7 @@ let addRent = function (req, res) {
             let value;
             if (req.body.hasOwnProperty('fromDate')) {
                 value = req.body.fromDate;
-                value = value.replace(/'/g, "\\'");
+                value = new Date(value).toMysqlFormat();
             } else {
                 console.log('No fromDate');
                 return;
@@ -111,7 +129,7 @@ let addRent = function (req, res) {
             let value;
             if (req.body.hasOwnProperty('toDate')) {
                 value = req.body.toDate;
-                value = value.replace(/'/g, "\\'");
+                value = new Date(value).toMysqlFormat();
             } else {
                 console.log('No toDate');
                 return;
@@ -145,8 +163,8 @@ let addRent = function (req, res) {
                 throw err;
             }
 
-            let sql = "INSERT INTO Rent (User_Id, Comment, Start_Date, End_Date, Status_Id, Status_Change_Date)  VALUES ('1', '" + rent.comment() + "', " + rent.fromDate() + ", " + rent.toDate() + ", 1 , NOW() )";
-
+            let sql = "INSERT INTO Rent (User_Id, Comment, Start_Date, End_Date, Status_Id, Status_Change_Date)  VALUES ('1', '" + rent.comment() + "', '" + rent.fromDate() + "', '" + rent.toDate() + "', 1 , NOW() )";
+            console.log(sql);
             connection.query(sql, function (err, rows) {
                 connection.release();
                 if (err) {
@@ -156,8 +174,7 @@ let addRent = function (req, res) {
                     });
                 }
                 let rentId = rows.insertId;
-                let sql2 = "INSERT INTO Rent_Detail (Rent_Id, Type_Id, Quantity, Status, Status_Change_Date VALUES(" + rentId + ", " + rent.typeId() + ", " + rent.quantity() + ", 1 , NOW() )";
-
+                let sql2 = "INSERT INTO Rent_Detail (Rent_Id, Type_Id, Quantity, Status_Id, Status_Change_Date) VALUES (" + rentId + ", " + rent.typeId() + ", " + rent.quantity() + ", 1 , NOW() )";
                 connection.query(sql2, function (err, rows) {
                     if (err) {
                         console.log(err);
