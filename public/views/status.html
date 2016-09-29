@@ -1,16 +1,58 @@
 <div id="offer">
     <div class="container">
         <div class="row text-center">
-            <h1>Status zamówień Użytkownika</h1>
-            <div class="col-md-offset-3 col-md-6">
-                <div class="user" ng-repeat="order in orders">
-                    <span class="id">{{ order.Order_Id }}</span>
-                    <span class="Quantity"> {{ order.Quantity }} </span>
-                    <span class="Comment"> {{ order.Comment }} </span>
-                    <span class="Order_Date"> {{ order.Order_Date }} </span>
-                    <span class="Realization_Date"> {{ order.Realization_Date }} </span>
-                </div>
+            <h1>Twój status zamówień</h1>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="naglowek in [
+									'Id' , 'Kategoria' , 'Ilość' , 'Data zamówienia', 'Data realizacji', 'Uzasadnienie'
+								]">
+                            {{naglowek}}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="user" ng-repeat='order in orders'>
+                        <td class="id">{{ order.Order_Id }}</td>
+                        <td class="category_name">{{ order.Category_Name }}</td>
+                        <td class="quantity">{{ order.Quantity }}</td>
+                        <td class="order_date">{{ order.Order_Date }}</td>
+                        <td class="realization_date">{{ order.Realization_Date }}</td>
+                        <td class="comment">{{ order.Comment }}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+            <h1>Twój status wypożyczeń</h1>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="naglowek in [
+									'Id' , 'Kategoria' , 'Ilość' , 'Od kiedy', 'Do kiedy', 'Uzasadnienie'
+								]">
+                            {{naglowek}}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="user" ng-repeat='rent in rents'>
+                        <td class="id">{{ rent.Rent_Id }}</td>
+                        <td class="category_name">{{ rent.Category_Name }}</td>
+                        <td class="quantity">{{ rent.Quantity }}</td>
+                        <td class="start_date">{{ rent.Start_Date }}</td>
+                        <td class="end_date">{{ rent.Order_Date }}</td>
+                        <td class="comment">{{ rent.Comment }}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 </div>
+
