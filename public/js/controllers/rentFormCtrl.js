@@ -1,7 +1,7 @@
 /**
  * Created by m.charyton on 28.09.2016.
  */
-app.controller("rentFormCtrl", ['$scope', 'types', 'categories', function ($scope, types, categories) {
+app.controller("rentFormCtrl", ['$scope', 'types', 'categories', '$http', function ($scope, types, categories, $http) {
     "use strict";
     categories.success(function (data) {
         $scope.categories = data;
@@ -23,6 +23,11 @@ app.controller("rentFormCtrl", ['$scope', 'types', 'categories', function ($scop
 
     $scope.submit = function (rent) {
         $scope.toRent = JSON.stringify(rent);
+        let toRent = $scope.toRent;
+        $http.post('http://localhost:3000/api/rent/', toRent)
+            .then(function (response) {
+                console.log(response);
+            });
     };
 
 }]);
