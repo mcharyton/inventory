@@ -11,7 +11,7 @@ userRouter.use(function (req, res, next) {
     next();
 });
 
-let showInventory = function (req, res) {
+let showRent = function (req, res) {
     "use strict";
     // Show inventory
     let sql = "SELECT\
@@ -49,10 +49,10 @@ let showInventory = function (req, res) {
     querySql(req, res, sql);
 };
 
-let addInventory = function (req, res) {
+let addRent = function (req, res) {
     "use strict";
-    let inventory = {
-        label: function () {
+    let rent = {
+        /*  label: function () {
             let value;
             if (req.body.hasOwnProperty('label')) {
                 value = req.body.label;
@@ -62,132 +62,127 @@ let addInventory = function (req, res) {
                 return;
             }
             return value;
-        },
-        price: function () {
+         },*/
+        category: function () {
             let value;
-            if (req.body.hasOwnProperty('price')) {
-                value = req.body.price;
+            if (req.body.hasOwnProperty('selectedCategory')) {
+                value = req.body.selectedCategory;
                 value = value.replace(/'/g, "\\'");
             } else {
-                return null;
-            }
-            return value;
-        },
-        details: function () {
-            let value;
-            if (req.body.hasOwnProperty('details')) {
-                value = req.body.details;
-                value = value.replace(/'/g, "\\'");
-            } else {
-                return null;
-            }
-            return value;
-        },
-        sn: function () {
-            let value;
-            if (req.body.hasOwnProperty('sn')) {
-                value = req.body.sn;
-                value = value.replace(/'/g, "\\'");
-            } else {
-                return null;
-            }
-            return value;
-        },
-        status: function () {
-            let value;
-            if (req.body.hasOwnProperty('status')) {
-                value = req.body.status;
-                value = value.replace(/'/g, "\\'");
-            } else {
-                return null;
-            }
-            return value;
-        },
-        status_change_date: function () {
-            let value;
-            if (req.body.hasOwnProperty('status_change_date')) {
-                value = req.body.status_change_date;
-                value = value.replace(/'/g, "\\'");
-            } else {
-                return null;
-            }
-            return value;
-        },
-        type: function () {
-            let value;
-            if (req.body.hasOwnProperty('type')) {
-                value = req.body.type;
-                value = value.replace(/'/g, "\\'");
-            } else {
-                console.log('No type provided');
+                console.log('No category');
                 return;
             }
             return value;
         },
-        provider: function () {
+        typeId: function () {
             let value;
-            if (req.body.hasOwnProperty('provider')) {
-                value = req.body.provider;
+            if (req.body.hasOwnProperty('typeId')) {
+                value = req.body.typeId;
                 value = value.replace(/'/g, "\\'");
             } else {
-                return null;
-            }
-            return value;
-        }
-    };
-    let sql = "INSERT INTO Inventory (Label, Price, Details, Serial_Number, Status_Id, Status_Change_Date, Type_Id, Provider_Id) VALUES (" + inventory.label + ", " + inventory.price + ", " + inventory.details + ", " + inventory.sn + ", " + inventory.status + ", " + inventory.status_change_date + ", " + inventory.type + ", " + inventory.provider + ")";
-    querySql(req, res, sql);
-};
-
-let addProvider = function (req, res) {
-    "use strict";
-    let provider = {
-        name: function () {
-            let value;
-            if (req.body.hasOwnProperty('name')) {
-                value = req.body.name;
-                value = value.replace(/'/g, "\\'");
-            } else {
-                console.log('No provider name provided');
+                console.log('No typeId');
                 return;
             }
             return value;
         },
-        address: function () {
+        quantity: function () {
             let value;
-            if (req.body.hasOwnProperty('address')) {
-                value = req.body.address;
+            if (req.body.hasOwnProperty('quantity')) {
+                value = req.body.quantity;
                 value = value.replace(/'/g, "\\'");
             } else {
-                return null;
+                console.log('No quantity');
+                return;
             }
             return value;
         },
-        number: function () {
+        fromDate: function () {
             let value;
-            if (req.body.hasOwnProperty('number')) {
-                value = req.body.number;
+            if (req.body.hasOwnProperty('fromDate')) {
+                value = req.body.fromDate;
                 value = value.replace(/'/g, "\\'");
             } else {
-                return null;
+                console.log('No fromDate');
+                return;
             }
             return value;
         },
-        mail: function () {
+        toDate: function () {
             let value;
-            if (req.body.hasOwnProperty('mail')) {
-                value = req.body.mail;
+            if (req.body.hasOwnProperty('toDate')) {
+                value = req.body.toDate;
                 value = value.replace(/'/g, "\\'");
             } else {
-                return null;
+                console.log('No toDate');
+                return;
+            }
+            return value;
+        },
+        comment: function () {
+            let value;
+            if (req.body.hasOwnProperty('comment')) {
+                value = req.body.comment;
+                value = value.replace(/'/g, "\\'");
+            } else {
+                console.log('No comment');
+                return;
             }
             return value;
         }
-
     };
-    let sql = "INSERT INTO Providers (Provider_Name, Address, Phone_Number, Email) VALUES ()";
-    querySql(req, res, sql);
+
+
+    conn.pool.getConnection(function (err, connection) {
+        if (err) {
+            res.json({"code": 200, "status": "Error in connection to database: " + err});
+            return;
+        }
+
+        console.log("connected as: " + connection.threadId);
+
+        connection.beginTransaction(function (err) {
+            if (err) {
+                throw err;
+            }
+
+            let sql = "INSERT INTO Rent (User_Id, Comment, Start_Date, End_Date, Status_Id, Status_Change_Date)  VALUES ('1', '" + rent.comment() + "', " + rent.fromDate() + ", " + rent.toDate() + ", 1 , NOW() )";
+
+            connection.query(sql, function (err, rows) {
+                connection.release();
+                if (err) {
+                    console.log(err);
+                    return connection.rollback(function () {
+                        throw err;
+                    });
+                }
+                let rentId = rows.insertId;
+                let sql2 = "INSERT INTO Rent_Detail (Rent_Id, Type_Id, Quantity, Status, Status_Change_Date VALUES(" + rentId + ", " + rent.typeId() + ", " + rent.quantity() + ", 1 , NOW() )";
+
+                connection.query(sql2, function (err, rows) {
+                    if (err) {
+                        console.log(err);
+                        return connection.rollback(function () {
+                            throw err;
+                        });
+                    }
+
+                    connection.commit(function (err) {
+                        if (err) {
+                            return connection.rollback(function () {
+                                throw err;
+                            });
+                        }
+                        console.log("Success!:");
+                        console.log(rows);
+                        res.send("Rent order added successfully!");
+                        return rows;
+                    });
+                });
+            });
+        });
+    });
 };
+
 let changeStatus = function (req, res) {
     "use strict";
     if (req.body.hasOwnProperty("status")) {
@@ -229,16 +224,16 @@ function querySql(req, res, sql) {
 }
 // #######################################
 // ################ ROUTES ###############
-// ######## ROOT URI: /api/inventory #####
+// ######## ROOT URI: /api/rent #####
 // #######################################
 
 // create application/json parser
 var jsonParser = bodyParser.json();
 
 // Show specific inventory
-userRouter.get('/', showInventory);
-userRouter.post('/', addInventory);
-userRouter.post('/provider/', addProvider);
+userRouter.get('/', showRent);
+userRouter.post('/', addRent);
+//userRouter.post('/provider/', addProvider);
 
 // #######################################
 // ############ ROUTER EXPORT ############
