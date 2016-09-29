@@ -11,6 +11,27 @@ userRouter.use(function (req, res, next) {
     next();
 });
 
+
+/**
+ * You first need to create a formatting function to pad numbers to two digits…
+ **/
+function twoDigits(d) {
+    if (0 <= d && d < 10) return "0" + d.toString();
+    if (-10 < d && d < 0) return "-0" + (-1 * d).toString();
+    return d.toString();
+}
+
+/**
+ * …and then create the method to output the date string as desired.
+ * Some people hate using prototypes this way, but if you are going
+ * to apply this to more than one Date object, having it as a prototype
+ * makes sense.
+ **/
+Date.prototype.toMysqlFormat = function () {
+    return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
+};
+
+
 let showDetailedOrder = function (req, res) {
     "use strict";
     // Show inventory
@@ -19,145 +40,129 @@ let showDetailedOrder = function (req, res) {
     querySql(req, res, sql);
 };
 
-let addInventory = function (req, res) {
+let addOrder = function (req, res) {
     "use strict";
-    let inventory = {
-        label: function () {
+    let order = {
+        /*  label: function () {
+         let value;
+         if (req.body.hasOwnProperty('label')) {
+         value = req.body.label;
+         value = value.replace(/'/g, "\\'");
+         } else {
+         console.log('No label');
+         return;
+         }
+         return value;
+         },*/
+        category: function () {
             let value;
-            if (req.body.hasOwnProperty('label')) {
-                value = req.body.label;
+            if (req.body.hasOwnProperty('selectedCategory')) {
+                value = req.body.selectedCategory;
                 value = value.replace(/'/g, "\\'");
             } else {
-                console.log('No label');
+                console.log('No category');
                 return;
             }
             return value;
         },
-        price: function () {
+        typeId: function () {
             let value;
-            if (req.body.hasOwnProperty('price')) {
-                value = req.body.price;
+            if (req.body.hasOwnProperty('selectedType')) {
+                value = req.body.selectedType;
                 value = value.replace(/'/g, "\\'");
             } else {
-                return null;
-            }
-            return value;
-        },
-        details: function () {
-            let value;
-            if (req.body.hasOwnProperty('details')) {
-                value = req.body.details;
-                value = value.replace(/'/g, "\\'");
-            } else {
-                return null;
-            }
-            return value;
-        },
-        sn: function () {
-            let value;
-            if (req.body.hasOwnProperty('sn')) {
-                value = req.body.sn;
-                value = value.replace(/'/g, "\\'");
-            } else {
-                return null;
-            }
-            return value;
-        },
-        status: function () {
-            let value;
-            if (req.body.hasOwnProperty('status')) {
-                value = req.body.status;
-                value = value.replace(/'/g, "\\'");
-            } else {
-                return null;
-            }
-            return value;
-        },
-        status_change_date: function () {
-            let value;
-            if (req.body.hasOwnProperty('status_change_date')) {
-                value = req.body.status_change_date;
-                value = value.replace(/'/g, "\\'");
-            } else {
-                return null;
-            }
-            return value;
-        },
-        type: function () {
-            let value;
-            if (req.body.hasOwnProperty('type')) {
-                value = req.body.type;
-                value = value.replace(/'/g, "\\'");
-            } else {
-                console.log('No type provided');
+                console.log('No typeId');
                 return;
             }
             return value;
         },
-        provider: function () {
+        order_quantity: function () {
             let value;
-            if (req.body.hasOwnProperty('provider')) {
-                value = req.body.provider;
+            if (req.body.hasOwnProperty('quantity')) {
+                value = req.body.quantity;
+            } else {
+                console.log('No quantity');
+                return;
+            }
+            return value;
+        },
+        delivery_date: function () {
+            let value;
+            if (req.body.hasOwnProperty('deliveryDate')) {
+                value = req.body.deliveryDate;
+                value = new Date(value).toMysqlFormat();
+            } else {
+                console.log('No delivery date');
+                return;
+            }
+            return value;
+        },
+        comment: function () {
+            let value;
+            if (req.body.hasOwnProperty('comment')) {
+                value = req.body.comment;
                 value = value.replace(/'/g, "\\'");
             } else {
-                return null;
+                console.log('No comment');
+                return;
             }
             return value;
         }
     };
-    let sql = "INSERT INTO Inventory (Label, Price, Details, Serial_Number, Status_Id, Status_Change_Date, Type_Id, Provider_Id) VALUES (" + inventory.label + ", " + inventory.price + ", " + inventory.details + ", " + inventory.sn + ", " + inventory.status + ", " + inventory.status_change_date + ", " + inventory.type + ", " + inventory.provider + ")";
-    querySql(req, res, sql);
-};
 
-let addProvider = function (req, res) {
-    "use strict";
-    let provider = {
-        name: function () {
-            let value;
-            if (req.body.hasOwnProperty('name')) {
-                value = req.body.name;
-                value = value.replace(/'/g, "\\'");
-            } else {
-                console.log('No provider name provided');
-                return;
-            }
-            return value;
-        },
-        address: function () {
-            let value;
-            if (req.body.hasOwnProperty('address')) {
-                value = req.body.address;
-                value = value.replace(/'/g, "\\'");
-            } else {
-                return null;
-            }
-            return value;
-        },
-        number: function () {
-            let value;
-            if (req.body.hasOwnProperty('number')) {
-                value = req.body.number;
-                value = value.replace(/'/g, "\\'");
-            } else {
-                return null;
-            }
-            return value;
-        },
-        mail: function () {
-            let value;
-            if (req.body.hasOwnProperty('mail')) {
-                value = req.body.mail;
-                value = value.replace(/'/g, "\\'");
-            } else {
-                return null;
-            }
-            return value;
+
+    conn.pool.getConnection(function (err, connection) {
+        if (err) {
+            res.json({"code": 200, "status": "Error in connection to database: " + err});
+            return;
         }
 
-    };
-    let sql = "INSERT INTO Providers (Provider_Name, Address, Phone_Number, Email) VALUES ()";
-    querySql(req, res, sql);
+        console.log("connected as: " + connection.threadId);
+
+        connection.beginTransaction(function (err) {
+            if (err) {
+                throw err;
+            }
+
+            let sql = "INSERT INTO `Order` (User_Id, Status_Id, Status_Change_Date, Order_Date, Delivery_Date) VALUES (1, 1, NOW(), NOW(), '" + order.delivery_date() + "' )";
+            console.log(sql);
+            connection.query(sql, function (err, rows) {
+                connection.release();
+                if (err) {
+                    console.log(err);
+                    return connection.rollback(function () {
+                        throw err;
+                    });
+                }
+                let orderId = rows.insertId;
+                let sql2 = "INSERT INTO Order_Detail (Order_Id, Type_Id, User_Id, Quantity, Comment, Status_Id, Status_Change_Date, Order_Date, Realization_Date) VALUES (" + orderId + ", " + order.typeId() + ", 1," + order.order_quantity() + ", '" + order.comment() + "', 1, NOW(), NOW(), '" + order.delivery_date() + "' )";
+                console.log(sql2);
+                connection.query(sql2, function (err, rows) {
+                    if (err) {
+                        console.log(err);
+                        return connection.rollback(function () {
+                            throw err;
+                        });
+                    }
+
+                    connection.commit(function (err) {
+                        if (err) {
+                            return connection.rollback(function () {
+                                throw err;
+                            });
+                        }
+                        console.log("Success!:");
+                        console.log(rows);
+                        res.send("Order added successfully!");
+                        return rows;
+                    });
+                });
+            });
+        });
+    });
 };
+
+
 let changeStatus = function (req, res) {
     "use strict";
     if (req.body.hasOwnProperty("status_id")) {
@@ -209,7 +214,7 @@ var jsonParser = bodyParser.json();
 // userRouter.get('/orders/', showOrder);
 userRouter.get('/', showDetailedOrder);
 userRouter.get('/:id', showDetailedOrder);
-userRouter.post('/provider/', addProvider);
+userRouter.post('/', addOrder);
 
 // #######################################
 // ############ ROUTER EXPORT ############

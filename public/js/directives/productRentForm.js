@@ -47,7 +47,6 @@ app.directive('productRentForm', function () {
         <div class="col-sm-offset-3 col-sm-7">\
         <button type="submit" class="btn btn-primary">Wyslij</button>\
         </div> \
-        {{ toRent }}\
     </form>'
     };
 });

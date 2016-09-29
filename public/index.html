@@ -12,65 +12,64 @@
     <link href="css/style.css" rel="stylesheet" media="screen">
 </head>
 <body ng-app="app">
-
-<header>
-    <div class="container">
-        <div class="text-center">
-            <a href="#">Nazwa firmy</a>
-            <h1>System inwentaryzacyjny</h1>
+<div class="holder">
+    <header>
+        <div class="container">
+            <div class="text-center">
+                <a href="#">Nazwa firmy</a>
+                <h1>System inwentaryzacyjny</h1>
+            </div>
         </div>
-    </div>
-</header>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <ul class="nav navbar-nav">
-            <li><a href="/">Strona główna</a></li>
-            <li><a href="/pracownik">Pracownik</a></li>
-            <li><a href="/wypozycz">Wypożycz sprzęt</a></li>
-            <li><a href="/zamow">Zamów sprzęt</a></li>
-        </ul>
-    </div>
-</nav>
+    </header>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Strona główna</a></li>
+                <li><a href="/pracownik">Pracownik</a></li>
+                <li><a href="/wypozycz">Wypożycz sprzęt</a></li>
+                <li><a href="/zamow">Zamów sprzęt</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<section>
-    <div id="offer">
+    <section id="offer">
         <div class="container">
             <div class="ng-view"></div>
         </div>
-    </div>
-</section>
+    </section>
 
-<footer>
-    <div class="container">
-        <div class="row text-center">
-            <p class="lead">
-                Copyright &copy; | Wszelkie prawa zastrzeżone
-            </p>
+    <footer>
+        <div class="container">
+            <div class="row text-center">
+                <p class="lead">
+                    Copyright &copy; | Wszelkie prawa zastrzeżone
+                </p>
+            </div>
         </div>
-    </div>
-</footer>
-
+    </footer>
+</div>
 <script src="js/vendor/angular.min.js"></script>
 <script src="js/vendor/angular-route.min.js"></script>
 <script src="js/app.js"></script>
 
 <!-- CONTROLLERS -->
+<script src="js/controllers/loginCtrl.js"></script>
+<script src="js/controllers/orderFormCtrl.js"></script>
 <script src="js/controllers/profileCtrl.js"></script>
 <script src="js/controllers/rentFormCtrl.js"></script>
-<script src="js/controllers/loginCtrl.js"></script>
 <script src="js/controllers/statusCtrl.js"></script>
-<script src="js/controllers/orderFormCtrl.js"></script>
-
-<!-- SERVICES -->
-<script src="js/services/users.js"></script>
-<script src="js/services/types.js"></script>
-<script src="js/services/status.js"></script>
-<script src="js/services/categories.js"></script>
-<script src="js/services/rent.js"></script>
 
 <!-- DIRECTIVES -->
-<script src="js/directives/productRentForm.js"></script>
 <script src="js/directives/productOrderForm.js"></script>
+<script src="js/directives/productRentForm.js"></script>
+
+<!-- SERVICES -->
+<script src="js/services/categories.js"></script>
+<script src="js/services/rent.js"></script>
+<script src="js/services/status.js"></script>
+<script src="js/services/types.js"></script>
+<script src="js/services/users.js"></script>
+
 
 </body>
 </html>
