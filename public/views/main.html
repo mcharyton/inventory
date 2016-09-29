@@ -1,39 +1,35 @@
-<div id="offer">
-    <div class="container">
-        <div class="row text-center">
-            <div class="panel">
-                <h3 class="panel-heading">Formularz logowania</h3>
-                <form name="angularForm" class="panel-body" method="POST" novalidate action="//api.test/auth"
-                      data-ng-hide="correctLogIn" data-ng-submit="submitData($event)">
-                    <fieldset class="well">
-                        <div></div>
-                        <div class="form-group">
-                            <label for="email">E-mail: </label>
-                            <input type="email" required name="email" id="email" class="form-control"
-                                   data-ng-pattern="emailPattern" ng-model="user.email">
-                            <div class="error" ng-show="angularForm.email.$invalid && angularForm.email.$dirty">
-                                <span ng-show="angularForm.email.$error.pattern">Wpisz poprawny adres e-mail </span>
-                                <span ng-show="angularForm.email.$error.required">Wpisz poprawny adres e-mail</span>
-                            </div>
-                        </div>
-                        <div></div>
-                        <div class="form-group">
-                            <label for="password">Hasło: </label>
-                            <input type="password" required name="password" id="password" class="form-control"
-                                   data-ng-minlength='6' data-ng-pattern="passPattern" data-ng-model="user.pass">
-                            <div class="error" ng-show="angularForm.password.$invalid && angularForm.password.$dirty">
-                                <span ng-show="angularForm.password.$error">Błąd! Poprawne hasło zawiera minimum 6 znaków, przynajmniej jedną wielką literę i liczbę</span>
-                            </div>
-                        </div>
-                        <input type="submit" value="Login" class="btn btn-primary btn-block"
-                               data-ng-disabled="angularForm.$invalid">
-                    </fieldset>
-                </form>
+<div class="row text-center">
+    <div class="panel">
+        <h3 class="panel-heading">Formularz logowania</h3>
+        <form name="angularForm" class="panel-body" method="POST" novalidate action="//api.test/auth"
+              data-ng-hide="correctLogIn" data-ng-submit="submitData($event)">
+            <fieldset class="well">
+                <div></div>
+                <div class="form-group">
+                    <label for="email">E-mail: </label>
+                    <input type="email" required name="email" id="email" class="form-control"
+                           data-ng-pattern="emailPattern" ng-model="user.email">
+                    <div class="error" ng-show="angularForm.email.$invalid && angularForm.email.$dirty">
+                        <span ng-show="angularForm.email.$error.pattern">Wpisz poprawny adres e-mail </span>
+                        <span ng-show="angularForm.email.$error.required">Wpisz poprawny adres e-mail</span>
+                    </div>
+                </div>
+                <div></div>
+                <div class="form-group">
+                    <label for="password">Hasło: </label>
+                    <input type="password" required name="password" id="password" class="form-control"
+                           data-ng-minlength='6' data-ng-pattern="passPattern" data-ng-model="user.pass">
+                    <div class="error" ng-show="angularForm.password.$invalid && angularForm.password.$dirty">
+                        <span ng-show="angularForm.password.$error">Błąd! Poprawne hasło zawiera minimum 6 znaków, przynajmniej jedną wielką literę i liczbę</span>
+                    </div>
+                </div>
+                <input type="submit" value="Login" class="btn btn-primary btn-block"
+                       data-ng-disabled="angularForm.$invalid">
+            </fieldset>
+        </form>
 
-                <p class="bg-success login-info" data-ng-show="correctLogIn">Logowanie poprawne</p>
-                <p class="bg-warning login-info" data-ng-show="incorrectLogIn">Niepoprawne login lub hasło</p>
-                <p class="bg-danger login-info" data-ng-show="serverProblem">Błąd usługi</p>
-            </div>
-        </div>
+        <p class="bg-success login-info" data-ng-show="correctLogIn">Logowanie poprawne</p>
+        <p class="bg-warning login-info" data-ng-show="incorrectLogIn">Niepoprawne login lub hasło</p>
+        <p class="bg-danger login-info" data-ng-show="serverProblem">Błąd usługi</p>
     </div>
 </div>

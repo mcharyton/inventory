@@ -11,6 +11,7 @@ app.config(['$routeProvider', '$locationProvider', '$controllerProvider', functi
             templateUrl: '../views/pracownik.html'
         })
         .when('/zamow', {
+            controller: 'orderFormCtrl',
             templateUrl: '../views/zamow.html'
         })
         .when('/wypozycz', {

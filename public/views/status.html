@@ -1,60 +1,55 @@
-<div id="offer">
-    <div class="container">
-        <div class="row text-center">
-            <h1>Twój status zamówień</h1>
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th ng-repeat="naglowek in [
-									'Id' , 'Kategoria' , 'Ilość' , 'Data zamówienia', 'Data realizacji', 'Uzasadnienie'
-								]">
-                            {{naglowek}}
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="user" ng-repeat='order in orders'>
-                        <td class="id">{{ order.Order_Id }}</td>
-                        <td class="category_name">{{ order.Category_Name }}</td>
-                        <td class="quantity">{{ order.Quantity | number }}</td>
-                        <td class="order_date">{{ order.Order_Date | date: 'yyyy-MM-dd' }}</td>
-                        <td class="realization_date">{{ order.Realization_Date | date: 'yyyy-MM-dd' }}</td>
-                        <td class="comment">{{ order.Comment }}</td>
+<div class="row text-center">
+    <h1>Twój status zamówień</h1>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th ng-repeat="naglowek in [
+                            'Id' , 'Kategoria' , 'Ilość' , 'Data zamówienia', 'Data realizacji', 'Uzasadnienie'
+                        ]">
+                    {{naglowek}}
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="user" ng-repeat='order in orders'>
+                <td class="id">{{ order.Order_Id }}</td>
+                <td class="category_name">{{ order.Category_Name }}</td>
+                <td class="quantity">{{ order.Quantity | number }}</td>
+                <td class="order_date">{{ order.Order_Date | date: 'yyyy-MM-dd' }}</td>
+                <td class="realization_date">{{ order.Realization_Date | date: 'yyyy-MM-dd' }}</td>
+                <td class="comment">{{ order.Comment }}</td>
 
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <br>
-            <br>
-            <h1>Twój status wypożyczeń</h1>
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th ng-repeat="naglowek in [
-									'Id' , 'Kategoria' , 'Ilość' , 'Od kiedy', 'Do kiedy', 'Uzasadnienie'
-								]">
-                            {{naglowek}}
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="user" ng-repeat='rent in rents'>
-                        <td class="id">{{ rent.Rent_Id }}</td>
-                        <td class="category_name">{{ rent.Category_Name }}</td>
-                        <td class="quantity">{{ rent.Quantity | number }}</td>
-                        <td class="start_date">{{ rent.Start_Date | date: 'yyyy-MM-dd' }}</td>
-                        <td class="end_date">{{ rent.End_Date | date: 'yyyy-MM-dd' }}</td>
-                        <td class="comment">{{ rent.Comment }}</td>
-
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
+            </tr>
+            </tbody>
+        </table>
     </div>
-</div>
+    <br>
+    <br>
+    <h1>Twój status wypożyczeń</h1>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th ng-repeat="naglowek in [
+                            'Id' , 'Kategoria' , 'Ilość' , 'Od kiedy', 'Do kiedy', 'Uzasadnienie'
+                        ]">
+                    {{naglowek}}
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="user" ng-repeat='rent in rents'>
+                <td class="id">{{ rent.Rent_Id }}</td>
+                <td class="category_name">{{ rent.Category_Name }}</td>
+                <td class="quantity">{{ rent.Quantity | number }}</td>
+                <td class="start_date">{{ rent.Start_Date | date: 'yyyy-MM-dd' }}</td>
+                <td class="end_date">{{ rent.End_Date | date: 'yyyy-MM-dd' }}</td>
+                <td class="comment">{{ rent.Comment }}</td>
 
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
