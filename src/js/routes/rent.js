@@ -35,30 +35,19 @@ let showRent = function (req, res) {
     // Show inventory
     let sql = "SELECT\
     Rent.Rent_Id,\
-        Rent.`Comment`,\
-        Rent.Start_Date,\
-        Rent.End_Date,\
-        Rent_Detail.Rent_Detail_Id,\
-        Rent_Detail.Type_Id,\
-        Rent_Detail.Quantity,\
-        `Status`.Status_Name,\
-        Inventory_Category.Category_Name,\
-        Inventory_Type.Type_Name,\
         `User`.`Name`,\
         `User`.Surname,\
-        Rent.Status_Change_Date,\
-        Inventory.Label,\
-        Inventory.Serial_Number,\
-        Inventory_Category.Category_Id,\
-        Inventory_Type.Type_Id\
+        Inventory_Type.Type_Name,\
+        Rent_Detail.Quantity,\
+        Rent.Start_Date,\
+        Rent.End_Date,\
+        Rent.`Comment`\
     FROM\
     Rent\
     INNER JOIN Rent_Detail ON Rent_Detail.Rent_Id = Rent.Rent_Id\
-    INNER JOIN `Status` ON Rent.Status_Id = `Status`.Status_Id\
-    INNER JOIN Inventory ON Rent_Detail.Type_Id = Inventory.Type_Id\
-    INNER JOIN Inventory_Type ON Inventory_Type.Type_Id = Inventory.Type_Id\
     INNER JOIN `User` ON Rent.User_Id = `User`.User_Id\
-    INNER JOIN Inventory_Category ON Inventory_Category.Category_Id = Inventory_Type.Category_Id";
+    INNER JOIN Inventory_Type ON Rent_Detail.Type_Id = Inventory_Type.Type_Id\
+    ";
 
     /* if (req.body.hasOwnProperty("inventory")) {
         let inventory = req.body.inventory;
