@@ -8,6 +8,7 @@ let inventoryRouter = require('./src/js/routes/inventory.js');
 let orderRouter = require('./src/js/routes/order.js');
 let rentRouter = require('./src/js/routes/rent.js');
 let otherRouter = require('./src/js/routes/others.js');
+let authenticateRouter = require('./src/js/routes/authenticate.js');
 let bodyParser = require('body-parser');
 
 // parse application/x-www-form-urlencoded
@@ -19,7 +20,7 @@ app.use(bodyParser.json());
 app.get('/404', function (req, res) {
     res.status(404).send('Not found');
 });
-
+app.use('/authenticate', authenticateRouter);
 app.use('/api/', function (req, res, next) {
     console.log('Sprawdzam...');
     next();

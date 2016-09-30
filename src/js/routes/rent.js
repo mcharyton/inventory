@@ -39,7 +39,7 @@ let showRent = function (req, res) {
         Rent.Start_Date,\
         Rent.End_Date,\
         Rent_Detail.Rent_Detail_Id,\
-        Rent_Detail.Inventory_Id,\
+        Rent_Detail.Type_Id,\
         Rent_Detail.Quantity,\
         `Status`.Status_Name,\
         Inventory_Category.Category_Name,\
@@ -55,7 +55,7 @@ let showRent = function (req, res) {
     Rent\
     INNER JOIN Rent_Detail ON Rent_Detail.Rent_Id = Rent.Rent_Id\
     INNER JOIN `Status` ON Rent.Status_Id = `Status`.Status_Id\
-    INNER JOIN Inventory ON Rent_Detail.Inventory_Id = Inventory.Inventory_Id\
+    INNER JOIN Inventory ON Rent_Detail.Type_Id = Inventory.Type_Id\
     INNER JOIN Inventory_Type ON Inventory_Type.Type_Id = Inventory.Type_Id\
     INNER JOIN `User` ON Rent.User_Id = `User`.User_Id\
     INNER JOIN Inventory_Category ON Inventory_Category.Category_Id = Inventory_Type.Category_Id";
