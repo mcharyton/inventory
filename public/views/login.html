@@ -1,7 +1,7 @@
 <div class="row text-center">
     <div class="panel">
-        <h3 class="panel-heading">Formularz logowania {{ info }} </h3>
-
+        <h3 class="panel-heading">Formularz logowania </h3>
+        {{ info }}
         <form name="angularForm" class="panel-body" data-ng-hide="correctLogIn" ng-submit="submitData($event)">
             <fieldset class="well">
                 <div class="form-group">
@@ -25,8 +25,11 @@
                        data-ng-disabled="angularForm.$invalid">
             </fieldset>
         </form>
+        <div class="bg-success login-info" data-ng-show="correctLogIn">
+            <p>Logowanie poprawne </p>
+            <button class="btn" ng-click="go('/profil')">Przejdź do profilu</button>
+        </div>
 
-        <p class="bg-success login-info" data-ng-show="correctLogIn">Logowanie poprawne</p>
         <p class="bg-warning login-info" data-ng-show="incorrectLogIn">Niepoprawne login lub hasło</p>
         <p class="bg-danger login-info" data-ng-show="serverProblem">Błąd usługi</p>
     </div>

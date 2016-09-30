@@ -29,7 +29,7 @@ app.controller("loginCtrl", ['$scope', '$http', 'authenticationService', '$windo
                 $scope.info = data.data;
                 $scope.correctLogIn = true;
                 $window.sessionStorage.token = data.data;
-                $location.path('/');
+                $location.path('/pracownik');
             } else {
                 $scope.incorrectLogIn = true;
             }
