@@ -14,7 +14,7 @@
             <tbody>
             <tr class="user" ng-repeat='order in orders'>
                 <td class="id">{{ order.Order_Id }}</td>
-                <td class="category_name">{{ order.Category_Name }}</td>
+                <td class="category_name">{{ order.Type_Name }}</td>
                 <td class="quantity">{{ order.Quantity | number }}</td>
                 <td class="order_date">{{ order.Order_Date | date: 'yyyy-MM-dd' }}</td>
                 <td class="realization_date">{{ order.Realization_Date | date: 'yyyy-MM-dd' }}</td>
@@ -32,7 +32,7 @@
             <thead>
             <tr>
                 <th ng-repeat="naglowek in [
-                            'Id' , 'Kategoria' , 'Ilość' , 'Od kiedy', 'Do kiedy', 'Uzasadnienie'
+                            'Id' ,'Imie', 'Nazwisko',  'Kategoria' , 'Ilość' , 'Od kiedy', 'Do kiedy', 'Uzasadnienie'
                         ]">
                     {{naglowek}}
                 </th>
@@ -41,7 +41,9 @@
             <tbody>
             <tr class="user" ng-repeat='rent in rents'>
                 <td class="id">{{ rent.Rent_Id }}</td>
-                <td class="category_name">{{ rent.Category_Name }}</td>
+                <td class="name">{{ rent.Name }}</td>
+                <td class="surname">{{ rent.Surname }}</td>
+                <td class="category_name">{{ rent.Type_Name }}</td>
                 <td class="quantity">{{ rent.Quantity | number }}</td>
                 <td class="start_date">{{ rent.Start_Date | date: 'yyyy-MM-dd' }}</td>
                 <td class="end_date">{{ rent.End_Date | date: 'yyyy-MM-dd' }}</td>
